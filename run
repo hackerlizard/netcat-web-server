@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+generateContent() {
+    printf 'HTTP/1.0 200 OK\r\n'
+    printf 'Content-Type: text/html\r\n'
+    printf '\r\n'
+    printf '<meta http-equiv="refresh" content="3"/>'
+    printf '<link rel="icon" href="data:;base64,=">'
+    printf "<b>$(date)</b>"
+    printf "<pre>%s</pre>" "$(top -l 1)"
+}
+
+while true; do 
+    generateContent | nc -l 8000
+done
